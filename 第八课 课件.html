@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>练习</title>
+    <style>
+     img{
+       width: 60px;
+       height: 100px;
+     }
+    </style>
+</head>
+<body>
+    <p></p> 
+    <!-- 显示格式   20:02:36 -->
+    <!-- <img src="img/2.png" alt="">
+    <img src="img/0.png" alt="">
+    <img src="img/fuh.png" alt="">
+    <img src="img/0.png" alt="">
+    <img src="img/2.png" alt="">
+    <img src="img/fuh.png" alt="">
+    <img src="img/3.png" alt="">
+    <img src="img/6.png" alt=""> -->
+    
+
+  <!-- <script>
+    function getTime(){
+         var date=new Date()   //object  当前时间
+        //  var date2=Date()      //string   当前时间
+        //  var date3=Date.now()//number  1576542522018   从1970 1.1 8点 到现在的毫秒数
+         //console.dir(date)
+         //console.log(typeof date2)
+        
+        //var W=date.getDay()  //2  周二
+        var week=["星期日","星期一","星期二","星期三","星期四","星期五","星期六"]
+        //console.log(week[date.getDay()])
+        
+        var W=week[date.getDay()]
+        //console.log(W)  //星期二
+        var Y=date.getFullYear() //年
+        var Mo=date.getMonth()+1//月  +1
+        var D= date.getDate()  //日
+        var H=date.getHours() //时
+        var Mi=date.getMinutes() //分
+        var S=date.getSeconds() // 秒
+        var str=Y+"/"+Mo+"/"+D+"\n"+zero(H)+":"+zero(Mi)+":"+zero(S)+"\n"+W
+        return str
+      }
+        //console.log(Y,Mo,D,W,H,Mi,S)
+        //(1)想要以这种格式显示  2019/12/17 04:53:34
+        //console.log(Y+"/"+Mo+"/"+D+"\n"+H+":"+Mi+":"+S+"\n"+W)  //2019/12/17  17:1:49  星期二
+        //(2)这里就有一个问题了，17：01   显示出来是  17：1 ，时分秒都一样如果是1位数字的话，前面就没有0.
+        //本来是（01：09：08）然后它就成这样了（1：9：8）这里怎么让他显示正确
+
+        function zero(n){
+          // if(n<10){
+          //   return "0"+n
+          // }else{
+          //   return ""+n
+          // }
+          //(3)以上if语句太麻烦   可用 三目运算符
+            return n<10 ? "0"+n : ""+n
+        }
+        //console.log(zero(6))
+        //console.log(Y+"/"+Mo+"/"+D+"\n"+zero(H)+":"+zero(Mi)+":"+zero(S)+"\n"+W)
+        //(4)现在这个时间是死的，让她动起来，所以要加一个定时器 ，让时间自己动
+        var op=document.getElementsByTagName("p")[0]
+        //op.innerHTML=getTime()
+        setInterval(function(){
+          op.innerHTML=getTime()
+        },1000) -->
+  </script>
+  <!-- <script>
+    //(1)显示格式   20:02:36
+     // (2)时间是固定死的，现在获取一下本地时间
+     function getTime(){
+      var date=new Date()   //object  当前时间
+      var H=date.getHours() //时
+      var Mi=date.getMinutes() //分
+      var S=date.getSeconds() // 秒
+      
+      var str=zero(H)+":"+zero(Mi)+":"+zero(S)
+      return str
+    }
+      function zero(n){
+          return n<10 ? "0"+n : ""+n
+        }
+        function setTimes(){
+          var times=getTime()
+        //console.log(times) //现在只是在控制台输出了本机当前时间，与图片还没关联上，所以图片的时间是死的，是错误的
+        var oImg=document.getElementsByTagName("img")
+        for(var i=0;i<oImg.length;i++){
+          //console.log(i) //凡是有tagname获取的，就要for遍历
+          if(times.charAt(i)===":"){
+            oImg[i].src="img/fuh.png"
+          }else{
+            oImg[i].src="img/"+times[i]+".png"
+          }
+        }
+        }
+        
+        //现在想让时间自己自己计时，不用手动获取，所以需要加一个定时器
+        setInterval(function(){
+          setTimes()
+        },1000)
+        setTimes()
+        //现在想让 这个时间抖动，跟表一样，让时分秒 抖动（后面再补做）
+        
+</script>  -->
+<script>
+  //2.倒计时
+  //未来的时间（固定的）-现在的时间（实时变化的）= 时间差（变化的）
+  function getTime(){
+  var now=new Date() //当前时间
+  //console.log(now)
+  //var FutureTime=new Date(2019,12,18,10,55,00) //这样写有问题啊 
+  //console.log(FutureTime)   //Sat Jan 18 2020 10:55:00 GMT+0800
+  var FutureTime=new Date("Dec 20 2019 12:27:12")
+  //console.log(FutureTime)
+  var t=(FutureTime-now)/1000 //毫秒数 /1000= 秒
+  if(t<=0){
+    t=0
+  }
+  //重点：now 和FutureTime 都是对象，为什么可以相减。因为他们在进行运算的时候内部调用了getTime() ,number  1576542522018   从1970 1.1 8点 到现在的毫秒数
+  //就相当于console.log(now.getTime()) console.log(FutureTime.getTime())  ----console.log(FutureTime.getTime()-now.getTime())
+  //console.log(t) //此时的时间差 是一个 毫秒数  除以1000   ，现在是秒 数
+  //现在想把它转成秒，所以要 除以1000
+  //console.log(FutureTime.getTime()-now.getTime())
+//现在 想把这个时间差  转成  天 时 分 秒 的格式
+  // 1分=60秒       1时=60分=60*60=3600秒      1天=24时=24*3600=86400秒
+  // 天  parseInt(t/86400)
+  // 时  parseInt(t%86400/3600)
+  // 分  parseInt(t%86400%3600/60)
+ //  秒  console.log(parseInt(t%86400%3600%60/60))  //错误的
+  // 秒 console.log(parseInt(t%60))  //正确的   t/60 就是多少分，给他取模 剩余的就是秒
+   
+  
+  var TimeDifference=parseInt(t/86400)+"天"+parseInt(t%86400/3600)+"时"+parseInt(t%86400%3600/60)+"分"+parseInt(t%60*10)/10+"秒"
+  return  TimeDifference
+}
+  //现在加定时器  让这个倒计时 动起来
+  var op=document.getElementsByTagName("p")[0]
+  op.innerHTML=getTime()//因为不加这个 刷新后会顿一下，因为是停了一秒才开始走动的，所以一上来就让他先运行一下
+  setInterval(function(){
+    op.innerHTML=getTime()
+  },100) //因为秒 除了10，所以这里的1000要变为100
+ //作业：聚划算那种抢购倒计时 到0时0分0秒，停止
+ // s=234.345   *10=2343.45    取整=2343   再除以10=234.3
+ //秒  console.log(parseInt(t%60*10)/10)
+
+</script>
+
+</body>
+</html>

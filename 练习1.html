@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+       //1  charAt()
+       // string.charAt(下标)   获取指定位置的字符串
+        var str="qianduankaifa"
+    //    alert(str.charAt(3))  //n
+
+      // 2.去掉前后空格
+//                string.trim()
+
+        //3.charCodeAt()  //获取指定位置的字符编码
+        // console.log(str.charCodeAt(3))  //110
+        // console.log(str.charCodeAt())  //113   默认从0项开始 
+
+        // console.log("q">"n")  //true     字符串比大小 比的就是编码位置
+        // console.log("and">"ank")         //字符串是一位位去比 如果第一位比不出大小 那么就会到第二位
+        // console.log(3>"2")    //true      数字和字符串比较的时候 会变成数字的比较
+
+        //4.substring()
+//         用途： 提取指定范围字符串
+//              返回值： 一个字符串类型
+//             参数 数字
+        // console.log(str.substring())  //qianduankaifa   无参数  默认是0开始一直截取到最后
+        // console.log(str.substring(3)) //nduankaifa      1个参数    从指定位置开始 一直截取到最后
+        // console.log(str.substring(3,6)) //ndu  2个参数  从第3未开始 截取 到第6位  但不包括第6位 **********
+        // console.log(str.substring(6,3))//ndu   如果开始位置大于 结束位置  交换位置*******
+        // console.log(str.substring(3,3))  //空
+        //console.log(str.substring(-3,6))  // 负数 会变为0  qiandu
+
+       // 5.slice() 
+//        用途： 提取指定范围字符串
+//              返回值： 一个字符串类型
+//             参数 数字
+    //    console.log(str.slice()) //qianduankaifa 无参数  默认是0开始一直截取到最后
+    //    console.log(str.slice(3)) //nduankaifa   1个参数    从指定位置开始 一直截取到最后
+       //console.log(str.slice(3,6))   //ndu   2个参数  从第3未开始 截取 到第6位  但不包括第6位
+       //console.log(str.slice(6,3))  //空   不会交换位置 返回值空 ********
+        //console.log(str.slice(-9,8)) // duan  -1代表最后一项也就是a -2就是f 以此类推
+
+      //  6.substr()
+//       用途： 提取指定范围字符串
+//              返回值： 一个字符串类型
+//             参数 数字
+    //    console.log(str.substr()) //qianduankaifa
+    //    console.log(str.substr(3,6))  //nduank  从第3位开始截取  截取6位********
+    //    console.log(str.substr(3))  //nduankaifa   从第3位开始截取 一直到最后
+
+
+        //7.indexof()
+//         用途: 查找str2<作为整体>字符串在string字符串中首次出现的位置
+//              返回值： 是一个数字（下标）
+        // console.log(str.indexOf("a")) //2   如果不写 searchIndex  默认从0
+        // console.log(str.indexOf("a",5)) //6  从第5个位置开始  向后找a的位置
+        // console.log(str.indexOf("andu")) //2  作为整体查找出现的位置
+        // console.log(str.indexOf("adu")) //-1 如果没有找到就返回-1
+
+
+       // 8.indexof()
+//          var str2="a";
+//           var n=0;
+//           var arr=[];
+//           
+//         while(str.indexOf(str2,n)!=-1){
+//            arr.push(str.indexOf(str2,n));  //从第0个位置开始找 a 的位置  2 6 9 12
+//            n=str.indexOf(str2,n)+str2.length; //不懂
+//       }
+//         console.log(arr)  //[2, 6, 9, 12]
+
+
+    //9.lastIndexof()   从后面往前找*******************
+//     用途: 查找str2<作为整体>字符串在string字符串中"首次"出现的位置
+//              返回值： 是一个数字（下标）
+        //console.log(str.lastIndexOf("a")) //12 *************** 如果不写 searchIndex  默认从0
+       // console.log(str.lastIndexOf("adu"))  //-1  如果没有找到就返回-1
+      // console.log(str.lastIndexOf("a",5)) //2  从第5个位置开始往前找 a
+
+
+       //10.string.split(分割符)
+//        用途： 通过分割符把字符串变成数组
+//              返回值： 数组
+            
+            // console.log(str.split()) //["qianduankaifa"]  无参数 整体作为数组的一项
+            // console.log(str.split(""))//["q", "i", "a", "n", "d", "u", "a", "n", "k", "a", "i", "f", "a"] 空字符 把每一个字符作为数组的项
+            // console.log(str.split("a"))//["qi", "ndu", "nk", "if", ""] 分割符存在  那么从分隔符出进行分割 前后作为数组的项 注意 分隔符就没有了,变成了逗号
+            // console.log(str.split("w"))  //["qianduankaifa"]     分割符不存在 那么整体就作为数组的一项
+
+//        11. array.join（连接符）
+//           用途： 通过连接符把数组转成字符串
+//             返回值： 字符串
+            // var arr=["a","b","c","d"]
+            // console.log(typeof arr.join()) //a,b,c,d  //string  无参数 默认连接符为逗号
+            // console.log(arr.join("")) //abcd  空字符   把数组的每一项通过空格字符连接
+            // console.log(arr.join("-")) //a-b-c-d   有连接符  把数组的每一项通过这个连接符 连城一个字符串
+            
+           // array.reverse()  //颠倒顺序后的数组
+           // 例子： 颠倒 var str="qianduankaifa"
+        //    因为array.reverse()是数组类型，所以第1步：要 把str 用string.split()转换为数组
+        //    第2步：array.reverse() 颠倒顺序后  是数组类型
+        //    第3步：用array.join（）再转换为字符串
+//              var b=str.split("").reverse().join("");
+//             console.log(b);  //afiaknaudnaiq
+
+//             12.大小写转换
+//             toUpperCase() 字符串转成大写
+//               tolowercase() 字符串转成小写
+                // console.log(str.toUpperCase()) //QIANDUANKAIFA
+                // 现在想要 第一个字母大写，其余小写
+                
+               // console.log(str.charAt(0).toUpperCase()+str.substring(1))  //Qianduankaifa
+
+              // 13. arr.unshift()  向数组第一个追加1到多个数据
+              //var arr=[1,2,3,4]
+            //   console.log(arr.unshift(0)) //5  返回值: 追加项后新数组的新长度*******
+            //   console.log(arr)  //[0, 1, 2, 3, 4]
+
+             // arr.pop()  //删除数组的最后一项 
+            //   console.log(arr.pop())  //4  返回值： 删除的那一项**************
+            //  console.log(arr)  // [1, 2, 3]
+              //arr.shift()  //删除数组的第一项
+              //console.log(arr.shift()) //1   返回值： 删除的那一项**************
+              //console.log(arr) //[2, 3, 4]
+
+              //小案例
+
+
+
+//               14.arr.splice()
+//               用途： 数据的删除 替换 添加
+                    //返回值：删除的项 组成的新数组 *****************  
+//               arr.splice(starIndex，length，add)
+                var arr=[1,2,3,4]
+                // console.log(arr.splice()) //[]  没有删除数据 返回值是[]
+                // console.log(arr) //[1, 2, 3, 4]
+                
+                // console.log(arr.splice(1)) //[2, 3, 4]
+                // console.log(arr) //[1]
+                // arr.splice(1,2)
+                // console.log(arr.splice(1,2)) //[2, 3]  [4]
+                // console.log(arr)//[1, 4]   [1]  **********疑问：加了arr.splice(1,2)  结果会不一样
+
+                console.log(arr.splice(1,2,"a","b")) //[2, 3]
+                console.log(arr) // [1, "a", "b", 4]
+    </script>
+</body>
+</html>
