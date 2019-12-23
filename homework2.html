@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>第2课 课后作业</title>
+    <style>
+        /* 手机外壳背景图 */
+        .hsg{
+            background: url("img/3.jpg")no-repeat;
+            position: relative;
+            width: 240px;
+            height: 457px;
+            margin: auto;
+        }
+        /* 消息互发整体布局 */
+        #box{
+            width: 200px;
+            height: 355px;
+            border: 1px solid #cccccc;
+            position: absolute;
+            top:40px;
+            left: 20px;
+        }
+        /* 消息互发 文本输入框 样式 */
+        #text{
+            display: inline-block;
+            min-width: 50px;
+            max-width: 160px;
+            height: 25px;
+            line-height: 25px;
+            background: orchid;
+            vertical-align: middle;
+            border-radius: 5px;
+            color: white;
+            font-size: 15px;
+        }
+        .right #text{
+            background: pink;
+        }
+        .right{
+            float: right;
+        }
+        .left, .right{
+            display: inline-block;
+            margin: 5px 0;
+        }
+        .left>img,.right>img{
+            vertical-align: middle;
+        }
+        /* 底部整体布局 */
+        .content{
+            position: absolute;
+            bottom: 50px;
+            height: 40px;
+            left: 22px;
+        }
+        /* 底部 头像样式 */
+        #img{
+            vertical-align: middle;
+        }
+        /* 底部 信息输入框样式 */
+        #text1{
+            width:120px;
+            height: 20px;
+            border-radius: 10px;
+            outline: none;
+            border: 1px solid #cccccc;
+            vertical-align: middle;
+        }
+
+    </style>
+</head>
+<body>
+       <!-- 手机外壳背景图 -->
+        <div class="hsg">
+            <!-- 消息互发 部分 -->
+            <div id="box">
+                <!-- <div class="left">
+                    <img src="img/1.jpg" alt="龇牙">
+                    <div id="text">在吗</div>
+                </div>
+                <div class="right">
+                    <div id="text">怎么了</div>
+                    <img src="img/2.jpg" alt="愤怒">
+                </div> -->
+            </div>
+                <!-- 底部 人员切换+消息输入+发送按钮 -->
+            <div class="content">
+                <img id="img"src="img/1.jpg" alt="龇牙">
+                <input id="text1" type="text">
+                <input id="btn"type="button" value="发送">
+            </div>
+                
+            </div>
+        </div>
+   <script>
+    //    底部 点击 头像 图片切换效果
+        var oImg=document.getElementById("img")
+        var onoff=true
+        oImg.onclick=function(){
+            onoff=!onoff
+            if(onoff){
+                oImg.src="img/1.jpg"
+            }else{
+                oImg.src="img/2.jpg"
+            }
+        }
+        //消息发送
+        var oBtn=document.getElementById("btn")
+        var oBox=document.getElementById("box")
+        var oText1=document.getElementById("text1")
+        oBtn.onclick=function(){
+            if(onoff){
+                oBox.innerHTML+=`<div class="left"><img src="img/1.jpg" alt="龇牙"><div id="text">${oText1.value}</div></div>`
+                oText1.value=""  //点击发送按钮后  自动清空文本框的内容
+            }else{
+                oBox.innerHTML+=`<div class="right"><div id="text">${oText1.value}</div><img src="img/2.jpg" alt="愤怒"></div>`
+                oText1.value=""
+            }
+        }
+   </script>
+</body>
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>第10课</title>
+</head>
+<body>
+    <div id="div1"></div>
+    <script>
+        //console.log(Math.round(Math.random()*10));// 随机生成 0-10的所有整数
+        // var oDIv=document.getElementById("div1")
+        // //生成100个 0-5 之间的随机整数
+        // var html=""
+        // for(var i=0;i<100;i++){
+        //     html+=Math.round(Math.random()*5) +"<br>" 
+        // }
+        // oDIv.innerHTML=html
+
+        //arr.sort(); 对数据进行排序
+        arr=[3,2,1,4,6,5]
+        //console.log(arr.sort()) // [1, 2, 3, 4, 5, 6] 无参数   从小到大排序
+//         参数： 只有一个函数
+//                      函数里面接收2个参数
+//                   如果2者差值是正数 就交换位置  如果是负数就不交换位置 
+//                  a-b 从小到大
+//                  b-a 从大到小
+//                  
+//                  函数必须要有返回值
+        arr.sort(function(a,b){
+            console.log(a,b)
+            return a-b
+        })
+        
+    </script>
+    
+
+</body>
+</html>
