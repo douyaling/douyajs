@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>第3课 课后作业</title>
+    <style>
+        .wrap{
+            margin: auto;
+            text-align: center;
+            width:430px;
+        }
+        img{
+            width: 430px;
+            height: 400px;
+        }
+        
+    </style>
+</head>
+<body>
+    <div class="wrap">
+        <input type="button" value="顺序播放" id="order">
+        <input type="button" value="循环播放" id="loop">
+        <p id="title"></p>
+        <img src="img/11.jpg" alt="" id="img">
+        <p id="num">1/5</p>
+        <input type="button" value="上一张" id="forward">
+        <input type="button" value="下一张" id="next">
+    </div>
+    <script>
+        //点击顺序播放 和循环播放 两个按钮  让title的文字跟着切换 
+        var order=document.getElementById("order")
+        var loop=document.getElementById("loop")
+        var title=document.getElementById("title")
+        var onoff=true
+        order.onclick=function(){
+           title.innerHTML="图片为顺序播放"
+           onoff=true
+        }
+        loop.onclick=function(){
+            title.innerHTML="图片为循环播放"
+            onoff=false
+        }
+        //点击 上一张  下一张 两个按钮  让图片 跟着切换
+        //由于顺序和循环都是一张一张播放，只是到最后一张图片的时候有所不同，所以当图片播到第5张的时候加一个判断：
+        //如果为顺序播放，则图片保持在第5张，然后弹出提示框；如果为循环播放，则从第一张开始继续播放
+        var forward=document.getElementById("forward")
+        var next=document.getElementById("next")
+        var num=document.getElementById("num")
+        var img=document.getElementById("img")
+        var imgSrc=["img/11.jpg","img/22.jpg","img/33.jpg","img/44.jpg","img/55.jpg"]
+        var n=0
+        next.onclick=function(){
+            n++
+            if(n>imgSrc.length-1){//当图片播到第5张的时候加一个判断:顺序 和 循环 各自的播放模式
+                if(onoff){ //当到 最后一张的时候   根据onoff判断为顺序播放的模式
+                    alert("这已经是最后一张了")
+                    n=imgSrc.length-1
+                }else{//当到 最后一张的时候   否则就为循环播放的模式
+                    n=0
+                }
+            }
+            // img.src=imgSrc[n]
+            // num.innerHTML=n+1+"/"+imgSrc.length
+            change()
+            //console.log(n)
+        }
+        forward.onclick=function(){
+            n--
+            if(n<0){//当图片播到第1张的时候加一个判断:顺序 和 循环 各自的播放模式
+                if(onoff){ //当到 第一张的时候   根据onoff判断为顺序播放的模式
+                    alert("这已经是第一张了")
+                    n=0
+                }else{//当到 第一张的时候   否则就为循环播放的模式
+                    n=imgSrc.length-1
+                }
+            }
+            // img.src=imgSrc[n]
+            // num.innerHTML=n+1+"/"+imgSrc.length
+            change()
+        }
+        //最后代码优化：由于  img.src=imgSrc[n]   num.innerHTML=n+1+"/"+imgSrc.length 这两句代码 重复写了两次，
+        //所以可以 在代码最后定义一个 有名函数  ，然后哪里需要 调用这个有名函数即可
+        function change(){
+            img.src=imgSrc[n]
+            num.innerHTML=n+1+"/"+imgSrc.length
+        }
+           
+    </script>
+</body>
+</html>
