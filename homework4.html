@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>第四课-索引值得运用和数据类型</title>
+    <style>
+        .wrap{
+            width: 600px;
+            height: 450px;
+            border: 1px solid #cccccc;
+            margin: auto;
+            position: relative;
+        }
+        /* 中文标题样式 */
+        h2{
+            padding-left: 50px;
+        }
+        /* 图片样式 */
+        img{
+            width: 500px;
+            height: 300px;
+            padding: 0 50px;
+        }
+        /* 左右按钮样式 */
+        #left,#right{
+            position: absolute;
+            font-size: 40px;
+            font-weight: bold;
+            top: 45%;
+            width: 50px;
+            height: 50px;
+            border-radius: 25px;
+            background: #ff5100;
+            opacity: 0.5;
+        }
+        #left{
+            left:50px;
+        }
+        #right{
+            right: 50px;
+        }
+       
+        /* 底部 小圆点提示 样式 */
+        .list{
+            text-align: center;
+        }
+        li{
+            list-style: none;
+            width: 20px;
+            height: 20px;
+            display: inline-block;
+            background: #cccac5;
+            margin: 0 5px;
+            border-radius: 10px;
+        }
+        .active{
+            background: orange;
+        }
+    </style>
+</head>
+<body>
+    <!-- 疑问：左右按钮的定位是要以img 为父级参考定位对象  ，还是以wrap ？
+          左右按钮的定位位置找不准  -->
+    <div class="wrap">
+        <h2>带缩略图的图片轮播</h2>
+        <img id="img"src="img/111.jpg" alt="">
+        <div id="left">&it;</div>
+        <div id=right>&gt;</div>
+        <ul class="list">
+            <li class="active"></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+        </ul>
+    </div>
+    <script>
+        //（1）第一步：当鼠标移入到左右按钮身上的时候 它的颜色会变深 ; 鼠标移开的时候颜色恢复原样
+        var left=document.getElementById("left")
+        var right=document.getElementById("right")
+        left.onmouseover=function(){
+            left.style.opacity=1
+        }
+        left.onmouseout=function(){
+            left.style.opacity=0.5
+        }
+        right.onmouseover=function(){
+            right.style.opacity=1
+        }
+        right.onmouseout=function(){
+            right.style.opacity=0.5
+        }
+        //（2）第二步： 点击 左右按钮 图片轮播
+        var img=document.getElementById("img")
+        imgSrc=["img/111.jpg","img/222.jpg","img/333.jpg","img/444.jpg","img/555.jpg"]
+        var n=0
+        right.onclick=function(){
+            n++
+            if(n>imgSrc.length-1){
+                n=0
+            }
+            img.src=imgSrc[n]
+        }
+        left.onclick=function(){
+            n--
+            if(n<0){
+                n=imgSrc.length-1
+            }
+            img.src=imgSrc[n]
+        }
+        //（3）第三步 ：点击底部小圆点 出现对应的图片
+        var li=document.getElementsByTagName("li")//集合 要遍历其中每一个元素的话就要想到用for循环
+        // console.log(li)
+        for(var i=0;i<li.length;i++){
+            li[i].index=i
+            li[i].onclick=function(){
+                for(var j=0;j<li.length;j++){
+                    li[j].className=""
+                }
+                //要清除上一个 小圆点 的背景    可用大清洗方法
+                this.className="active"
+                img.src=imgSrc[this.index]
+            }
+            
+        }
+        //（4）第四步：让第2步和 第3步 连接起来 ，即：底部按钮如果已经是第三张照片了，点右边按钮的时候，下一张图片从第三张开始，而不要从头开始
+        
+    </script>
+</body>
+</html>
