@@ -18,22 +18,26 @@
             padding-left: 50px;
         }
         /* 图片样式 */
-        img{
+        #img{
             width: 500px;
             height: 300px;
             padding: 0 50px;
         }
         /* 左右按钮样式 */
         #left,#right{
+            opacity: 0.5;
             position: absolute;
-            font-size: 40px;
-            font-weight: bold;
-            top: 45%;
+            top: 50%;
             width: 50px;
             height: 50px;
-            border-radius: 25px;
+            line-height: 50px;
+            font-size: 50px;
+            font-weight: bold;
+            text-align: center;
             background: #ff5100;
-            opacity: 0.5;
+            border-radius: 25px;
+            transform:translateY(-50%);
+            cursor: pointer;
         }
         #left{
             left:50px;
@@ -47,6 +51,7 @@
             text-align: center;
         }
         li{
+            position: relative;
             list-style: none;
             width: 20px;
             height: 20px;
@@ -54,9 +59,21 @@
             background: #cccac5;
             margin: 0 5px;
             border-radius: 10px;
+            cursor: pointer;
         }
         .active{
             background: orange;
+        }
+        li img{
+            position: absolute;
+            top:-60px;
+            left:-100%;
+            display: none;
+            width: 60px;
+            height: 40px;
+        }
+        li:hover img{
+            display: inline-block;
         }
     </style>
 </head>
@@ -66,14 +83,14 @@
     <div class="wrap">
         <h2>带缩略图的图片轮播</h2>
         <img id="img"src="img/111.jpg" alt="">
-        <div id="left">&it;</div>
+        <div id="left">&lt;</div>
         <div id=right>&gt;</div>
         <ul class="list">
-            <li class="active"></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
+            <li class="active"><img src="img/111.jpg" alt=""></li>
+            <li><img src="img/222.jpg" alt=""></li>
+            <li><img src="img/333.jpg" alt=""></li>
+            <li><img src="img/444.jpg" alt=""></li>
+            <li><img src="img/555.jpg" alt=""></li>
         </ul>
     </div>
     <script>
@@ -94,6 +111,7 @@
         }
         //（2）第二步： 点击 左右按钮 图片轮播
         var img=document.getElementById("img")
+        var li=document.getElementsByTagName("li")//集合 要遍历其中每一个元素的话就要想到用for循环
         imgSrc=["img/111.jpg","img/222.jpg","img/333.jpg","img/444.jpg","img/555.jpg"]
         var n=0
         right.onclick=function(){
@@ -102,6 +120,10 @@
                 n=0
             }
             img.src=imgSrc[n]
+            for(var j=0;j<li.length;j++){
+                li[j].className=""
+            }
+            li[n].className="active"
         }
         left.onclick=function(){
             n--
@@ -109,9 +131,13 @@
                 n=imgSrc.length-1
             }
             img.src=imgSrc[n]
+            for(var j=0;j<li.length;j++){
+                li[j].className=""
+            }
+            li[n].className="active"
         }
         //（3）第三步 ：点击底部小圆点 出现对应的图片
-        var li=document.getElementsByTagName("li")//集合 要遍历其中每一个元素的话就要想到用for循环
+        
         // console.log(li)
         for(var i=0;i<li.length;i++){
             li[i].index=i
@@ -122,6 +148,7 @@
                 //要清除上一个 小圆点 的背景    可用大清洗方法
                 this.className="active"
                 img.src=imgSrc[this.index]
+                n=this.index
             }
             
         }
