@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>数据类型转换和函数传参</title>
+    <style>
+        #wrap{
+            width: 400px;
+            height: 300px;
+            border: 1px solid #000000;
+        }
+        span{
+            margin: 0 5px;
+        }
+        li{
+            margin: 5px 0;
+        }
+    </style>
+</head>
+<body>
+   <div id="wrap">
+       <ul class="list">
+           <li>
+               <input type="button" value="-">
+               <span>0</span>
+               <input type="button" value="+"> 单价：15元 ；小计：0元；  
+           </li>
+           <li>
+                <input type="button" value="-">
+                <span>0</span>
+                <input type="button" value="+"> 单价：10元 ；小计：0元；  
+            </li>
+            <li>
+                <input type="button" value="-">
+                <span>0</span>
+                <input type="button" value="+"> 单价：5元 ；小计：0元；  
+            </li>
+            <li>
+                <input type="button" value="-">
+                <span>0</span>
+                <input type="button" value="+"> 单价：2元 ；小计：0元；  
+            </li>
+            <li>
+                <input type="button" value="-">
+                <span>0</span>
+                <input type="button" value="+"> 单价：1元 ；小计：0元；  
+            </li>
+        </ul> 
+        <p>商品一共0件；</p>
+        <p>一共花费0元；</p>
+        <p>其中最贵的商品单价是0元；</p>
+   </div>
+   <script>
+       var wrap=document.getElementById("wrap")
+       var list=wrap.getElementsByClassName("list")[0]
+       var li=list.getElementsByTagName("li")//想要遍历每一个Li就要想到用for循环
+       //先 实现第一个 li 的功能 ，后面的用函数 传参
+            //点击+  — 按钮 ，span和 小计 后面的数字 要跟着变化
+       
+   </script>
+</body>
+</html>
