@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>数据类型转换和函数传参</title>
+    <style>
+        
+        #wrap1,#wrap2{
+            position: relative;
+            width: 600px;
+            height: 400px;
+            margin: auto;
+            border: 1px solid #cccccc;
+            text-align: center;
+        }
+        #wrap2{
+            margin-top: 50px;
+        }
+        img{
+            width: 500px;
+            height: 300px;
+        }
+        .list{
+            margin-top: 20px;
+        }
+        li{
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            margin: 0 10px;
+            background: pink;
+            cursor: pointer;
+            border-radius: 10px;
+        }
+        .left,.right{
+            position: absolute;
+            top: 40%;
+            font-size: 30px;
+            font-weight: bold;
+            transform: translateY(-40%);
+            cursor: pointer;
+        }
+        .left{
+            left: 50px;
+        }
+        .right{
+            right: 50px;
+        }
+        .active{
+            background: red;
+        }
+        .active1{
+            background: violet;
+        }
+    </style>
+</head>
+<body>
+    <div id="wrap1">
+        <img src="img/111.jpg" alt="">
+        <div class="left">&lt;</div>
+        <div class="right">&gt;</div>
+        <ul class="list">
+            <!-- <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li> -->
+        </ul>
+    </div>
+    <div id="wrap2">
+        <img src="img/111.jpg" alt="">
+        <div class="left">&lt;</div>
+        <div class="right">&gt;</div>
+        <ul class="list">
+            <!-- <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li> -->
+        </ul>
+    </div>
+ 
+    <script>
+        //函数传参 代码复用  相同的代码用一个有名函数包起来
+        fn("wrap1",["img/111.jpg","img/222.jpg","img/333.jpg","img/444.jpg","img/555.jpg"],"active1","onclick")
+        fn("wrap2",["img/222.jpg","img/333.jpg","img/444.jpg","img/555.jpg"],"active","onmouseover")
+        function fn(id,imgUrl,active,evt){
+            //var  id=
+            //var imgUrl
+            //var active
+            //var evt
+        var wrap=document.getElementById(id)
+        var list=wrap.getElementsByClassName("list")[0]
+        var img=wrap.getElementsByTagName("img")[0]
+        // var imgUrl=["img/111.jpg","img/222.jpg","img/333.jpg","img/444.jpg","img/555.jpg"]
+        var li=list.getElementsByTagName("li") //要遍历每一个元素  想到用for循环
+        var str=""
+        for(var i=0;i<imgUrl.length;i++){
+            str+="<li></li>"
+        }
+        list.innerHTML=str
+        li[0].className=active
+
+        var old=0 
+        for(var i=0;i<li.length;i++){
+            li[i].index=i
+            li[i][evt]=function(){//点不能 读变量 ,evt是变量
+                li[old].className=""
+                this.className=active
+                old=this.index
+                img.src=imgUrl[this.index]
+            }
+        }
+    }
+    </script>
+</body>
+</html>
