@@ -25,40 +25,101 @@
            <li>
                <input type="button" value="-">
                <span>0</span>
-               <input type="button" value="+"> 单价：15元 ；小计：0元；  
+               <input type="button" value="+"> 单价：<em>15</em>元 ；小计：<strong>0</strong>元；  
            </li>
            <li>
                 <input type="button" value="-">
                 <span>0</span>
-                <input type="button" value="+"> 单价：10元 ；小计：0元；  
+                <input type="button" value="+"> 单价：<em>10</em>元 ；小计：<strong>0</strong>元；  
             </li>
             <li>
                 <input type="button" value="-">
                 <span>0</span>
-                <input type="button" value="+"> 单价：5元 ；小计：0元；  
+                <input type="button" value="+"> 单价：<em>5</em>元 ；小计：<strong>0</strong>元；
             </li>
             <li>
                 <input type="button" value="-">
                 <span>0</span>
-                <input type="button" value="+"> 单价：2元 ；小计：0元；  
+                <input type="button" value="+"> 单价：<em>2</em>元；小计：<strong>0</strong>元；  
             </li>
             <li>
                 <input type="button" value="-">
                 <span>0</span>
-                <input type="button" value="+"> 单价：1元 ；小计：0元；  
+                <input type="button" value="+"> 单价：<em>1</em>元 ；小计：<strong>0</strong>元；  
             </li>
         </ul> 
-        <p>商品一共0件；</p>
-        <p>一共花费0元；</p>
-        <p>其中最贵的商品单价是0元；</p>
+        <p>
+            商品一共<span id="num">0</span>件；<br>
+            一共花费<span id="price">0</span>元；<br>
+            其中最贵的商品单价是<span id="max">0</span>元；
+        </p>
    </div>
    <script>
        var wrap=document.getElementById("wrap")
        var list=wrap.getElementsByClassName("list")[0]
-       var li=list.getElementsByTagName("li")//想要遍历每一个Li就要想到用for循环
-       //先 实现第一个 li 的功能 ，后面的用函数 传参
+       var li=list.getElementsByTagName("li")
+       //先 实现第一个li[0]的功能 ，后面的用函数 传参
             //点击+  — 按钮 ，span和 小计 后面的数字 要跟着变化
-       
+            //总价<strong>=单价<em>*数量<span.innerHTML>
+        // fn(li[0])
+        // fn(li[1])
+        // fn(li[2])
+        // fn(li[3])
+        // fn(li[4])
+        for(var i=0;i<li.length;i++){
+            fn(li[i])
+        }
+        function fn(l){
+            var input=l.getElementsByTagName("input")
+            var span=l.getElementsByTagName("span")[0]
+            
+            
+            var strong=l.getElementsByTagName("strong")[0]
+            var price=l.getElementsByTagName("em")[0]
+            input[1].onclick=function(){
+                span.innerHTML++
+                strong.innerHTML=price.innerHTML*span.innerHTML
+                fn2()
+            }
+            input[0].onclick=function(){
+                if(span.innerHTML<=0){
+                    return 
+                }
+                span.innerHTML--
+                strong.innerHTML=parseFloat(price.innerHTML)*span.innerHTML
+                fn2()
+            }
+        }
+        
+      //因为5个li的功能都一样，所以将第一个Li 的功能用一个有名函数 包起来 ，进行函数传参  
+       //商品一共几件（5个Li中的 数量<span.innerHTML> 加起来） ；
+       //一共花费多少元（5个Li中的 数量<strong.innerHTMLL> 加起来）
+       //其中最贵的商品单价是(在已购买的商品中 找 最大的 <em>)
+        var allNum=document.getElementById("num")
+        var allPrice=document.getElementById("price")
+        var allMax=document.getElementById("max")
+        var span=list.getElementsByTagName("span")
+        var strong=list.getElementsByTagName("strong")
+        var em=list.getElementsByTagName("em")
+        function fn2(){
+            var n=0
+            var p=0
+            var best=0
+            for (var i=0;i<li.length;i++){
+                n+=parseFloat(span[i].innerHTML)
+                p+=parseFloat(strong[i].innerHTML)
+                if(span[i].innerHTML!=0){
+                if(best<parseFloat(em[i].innerHTML)){
+                    best=parseFloat(em[i].innerHTML)
+                }
+            }
+        }
+           
+        allNum.innerHTML=n
+        allPrice.innerHTML=p
+        allMax.innerHTML=best
+    }
+        
    </script>
 </body>
 </html>
