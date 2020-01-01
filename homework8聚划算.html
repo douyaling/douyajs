@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+            font-family:'微软雅黑'
+        }
+        .wrap{
+            width: 800px;
+            height: 400px;
+            border: 1px solid #000000;
+            margin: auto;
+        }
+        img{
+            float: left;
+            padding-right: 50px;
+        }
+        .right{
+           padding: 10px;
+           float: right;
+        }
+        .msg{
+            padding: 20px 0;
+        }
+        span{
+            height: 25px;
+            background: orange;
+            color: aliceblue; 
+            display: inline-block;
+            margin-right:10px;
+            padding: 0 5px;
+            border-radius: 5px;
+        }
+        ul{
+            width: auto;
+            border: 1px dashed #cccccc;
+        }
+        li{
+            font-size: 12px;
+            padding: 5px;
+            color: #cccccc;
+            font-family: initial;
+        }
+        h5{
+            margin: 15px 0;
+        }
+        .price{
+            background: red;
+            margin: 10px 0;
+        }
+        button{
+            padding: 5px 15px;
+            font-size: 15px;
+            background: orange;
+            color: #ffffff;
+            border-radius: 5px;
+        }
+        .price{
+            padding: 10px 0;
+            color: #ffffff;
+            border-radius: 5px;
+        }
+        #price1{
+            text-decoration: line-through;
+        }
+        #price2{
+            font-size: 30px;
+        }
+    </style>
+</head>
+<body>
+    <div class="wrap">
+        <img src="img/homework8.png" alt="">
+        <div class="right">
+            <p>橙子水果新鲜10斤赣南的脐橙（每个ID限购5件）</p>
+            <div class="msg">
+                <span>包邮</span> 
+                <span>拍下立减10元</span>
+            </div>
+            <ul>
+                <li>细心挑选 美味爽口 自然成熟</li>
+                <li>新鲜采摘 肉嫩汁多，甜如初恋</li>
+                <li>品质保证 收藏加购 优先发货</li>
+            </ul>
+            <h5></h5>
+            <div class="price">
+                <p id="price1">&yen;138.00</p>
+                <p id="price2">&yen;32.8-95.8</p>
+            </div>
+            <button>马上抢</button>
+        </div>
+    </div>
+    <script>
+        
+        function getTime(){
+            var date=new Date()
+            var future=new Date("Wed Jan 16 2020 08:06:00")
+            var s=(future-date)/1000
+           // 判断：当时间差<=0的时候，让时间差=0，就会在0天0时0分0秒停止，因为0除以任何数都等于0
+            if(s<=0){
+                s=0
+            }
+            //var S=s%60
+            //秒后面加一位小数
+            var S=s%60*10
+            var Mi=s%86400%3600/60
+            var H=s%86400/3600
+            var D=s/86400
+            var time=parseInt(D)+"天"+zero(parseInt(H))+"时"+zero(parseInt(Mi))+"分"+zero(parseInt(S)/10)+"秒"
+            return time
+        }
+         //时分秒＜0 的  补零操作
+        function zero(n){
+            if(n<10){
+                return "0"+n
+            }else{
+                return ""+n
+            }
+        }
+        
+        var h5=document.getElementsByTagName("h5")[0]
+        h5.innerHTML="还剩："+getTime()
+        setInterval(function(){
+            h5.innerHTML="还剩："+getTime()
+        },100)
+    </script>
+</body>
+</html>
