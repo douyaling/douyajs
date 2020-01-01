@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .wrap{
+            width: 500px;
+            height: 300px;
+            border: 1px solid #cccccc;
+            margin: auto;
+            position: relative;
+        }
+        img{
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 350px;
+            height: 270px;
+            transform: translate(-50%,-50%);
+        }
+        .left li,.right li{
+            width: 60px;
+            height: 30px;
+            line-height: 30px;
+            border: 1px solid pink ;
+            margin: 8px 0;
+            text-align: center;
+            font-size: 15px;
+            cursor: pointer;
+        }
+        .right,.left{
+            padding: 0;
+            margin: 0;
+            list-style: none;
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+        .left{
+            left: 10px;
+        }
+        .right{
+            right: 10px;
+        }
+        .active{
+            background: rgb(250, 216, 250);
+        }
+    </style>
+</head>
+<body>
+    <div class="wrap">
+        <ul class="left">
+            <li class="active">连衣裙</li>
+            <li>衬衫</li>
+            <li>T恤</li>
+            <li>牛仔裤</li>
+            <li>婚纱</li>
+            <li>风衣</li>
+            <li>卫衣</li>
+        </ul>
+        <img src="img/1连衣裙.jpg" alt="">
+        <ul class="right">
+            <li>运动鞋</li>
+            <li>帆布鞋</li>
+            <li>眼镜</li>
+            <li>双肩包</li>
+            <li>项链</li>
+            <li>玩具</li>
+            <li>凉鞋</li>
+        </ul>
+        
+    </div>
+    <script>
+        //li 和 图片 自动轮播
+        var li=document.getElementsByTagName("li")
+        var img=document.getElementsByTagName("img")[0]
+        var arr=["img/1连衣裙.jpg","img/2衬衫.jpg","img/3T恤.jpg","img/4牛仔裤.jpg","img/5婚纱.jpg","img/6风衣.jpg",
+        "img/7卫衣.jpg","img/11运动鞋.jpg","img/22帆布鞋.jpg","img/33眼镜.jpg","img/44双肩包.jpg","img/55项链.jpg",
+        "img/66玩具.jpg","img/77凉鞋.jpg"]
+        var n=0
+        var timer=null
+        autoplay()
+        function autoplay(){
+            timer=setInterval(function(){
+            n++
+            for(var i=0;i<li.length;i++){
+                li[i].className=""
+            }
+            li[n%li.length].className="active"
+            img.src=arr[n%li.length]
+        },1000)
+    }
+        
+        // //鼠标鼠标移入到某张图片  停止轮播  鼠标移开 从停止的位置继续轮播
+        // img.onmouseover=function(){
+        //     clearInterval(timer)
+        // }
+        // img.onmouseout=function(){
+        //     autoplay()
+        // }
+
+         //鼠标移入 每个li 出现对应图片，并且让这种图片停住   鼠标移开，接着停止的位置自动轮播
+      
+        for(var i=0;i<li.length;i++){
+            li[i].index=i
+            li[i].onmouseover=function(){
+                img.src=arr[this.index]
+                for(var i=0;i<li.length;i++){
+                li[i].className=""
+                }
+                this.className="active"
+               
+                n=this.index
+                clearInterval(timer)
+            }
+            li[i].onmouseout=function(){
+                autoplay()
+            }
+        }
+    </script>
+</body>
+</html>
