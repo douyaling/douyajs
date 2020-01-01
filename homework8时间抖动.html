@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        img{
+            width: 100px;
+            position: relative;
+        }
+    </style>
+</head>
+<body>
+    <img src="img8/0.png" alt="">
+    <img src="img8/0.png" alt="">
+    <img src="img8/fuh.png" alt="">
+    <img src="img8/0.png" alt="">
+    <img src="img8/0.png" alt="">
+    <img src="img8/fuh.png" alt="">
+    <img src="img8/0.png" alt="">
+    <img src="img8/0.png" alt="">
+</body>
+<script>
+    //获取本机当前时间
+    function getTime(){
+            var oDate=new Date()
+            var H=oDate.getHours()
+            var Mi=oDate.getMinutes()
+            var S=oDate.getSeconds()
+            var time=zero(H)+":"+zero(Mi)+":"+zero(S)
+            return time
+        }
+    //console.log(getTime())//获取本机当前时间
+    //连接上图片  以图片的形式 +定时器 显示本机时间
+    var aImg = document.getElementsByTagName("img")
+    imgTimeFn()
+    setInterval(function(){
+        imgTimeFn()
+    },1000)
+    function imgTimeFn(){
+        var imgTime=getTime()
+        for(var i=0;i<aImg.length;i++){
+        if(imgTime.charAt(i)===":"){
+            aImg[i].src= "img8/fuh.png"
+        }else{
+            aImg[i].src= "img8/"+imgTime[i]+".png"
+        }
+    }
+}
+    
+    //时分秒＜0 的  补零操作
+    function zero(n){
+        return n<10 ? "0"+n : ""+n
+    }
+    //兼容IE 和  Google 浏览器 获取位置
+    function getStyle(obj,attr){
+        if(obj.currentStyle){
+            return obj.currentStyle[attr]
+        }else{
+            return getComputedStyle(obj)[attr]
+        }
+    }
+    //封装抖函数[12 -12 9 -9 6 -6 3 -3 0]
+    function shake(obj,attr){
+        if(obj.timer){
+            return
+        }
+        var pos=parseInt(getStyle(obj,attr))
+        var arr=[]
+        var n=0
+        for(i=12;i>0;i-=3){
+            arr.push(i,-i)
+        }
+        arr.push(0)
+        obj.timer=setInterval(function(){
+            obj.style[attr]=pos+arr[n]+"px"
+            n++
+            if(n==arr.length){
+                clearInterval(timer)
+                obj.timer=null
+            }
+        },100)
+    }
+
+</script>
+</html>
