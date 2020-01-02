@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>9.字符串方法</title>
+    <style>
+        *{
+            font-family: "微软雅黑";
+        }
+        .wrap{
+            width: 600px;
+            height: 500px;
+            background: silver;
+            position: relative;
+        }
+        p{
+            width: 420px;
+            height: 260px;
+            background: #e5e2e2;
+            margin-left: 20px;
+            padding: 20px;
+        }
+        ul{
+            position: absolute;
+            right: 15px;
+            top: 30px;
+        }
+        ul li{
+            list-style: none;
+            width: 80px;
+            height:50px ;
+            line-height: 50px;
+            background: #b3d0e7;
+            text-align: center;
+            font-size: 18px;
+            color: #ffffff;
+            cursor: pointer;
+        }
+        #zk{
+            background: red;
+        }
+        .text{
+            width: 500px;
+            height:130px ;
+            border: 10px solid red;
+            margin: 20px;
+        }
+        .text span{
+            display: inline-block;
+            margin: 10px 0 5px 15px;
+            padding: 10px;
+            cursor: pointer;
+        }
+        hr{
+            margin: 10px;
+        }
+        .text input{
+            margin: 10px 0 0 15px;
+        }
+        .li-active{
+            background: #4799db;
+        }
+        .span-active{
+            background: tomato;
+        }
+    </style>
+</head>
+<body>
+    <div class="wrap">
+        <p>GitHub是一个面向开源及私有软件项目的托管平台，因为只支持git 作为唯一的版本库格式进行托管，
+            故名GitHub。GitHub于2008年4月10日正式上线，除了Git代码仓库托管及基本的 Web管理界面以外，
+            还提供了订阅、讨论组、文本渲染、在线文件编辑。
+        </p>
+        <ul>
+            <li id="zk">展开</li>
+            <li>查找</li>
+            <li>替换</li>
+        </ul>
+        <div class="text">
+            <span>查找</span>
+            <span>替换</span>
+            <hr>
+            <input type="text" value="文本">
+            <!-- <input type="text"> -->
+            <input type="button" value="查找">
+        </div>
+    </div>
+    <script>
+        //鼠标点击 li下的 "查找"背景加色，并且 span下的 "查找" 也要 加上背景 并跳转到 相应的input
+        //鼠标点击 li下的 "替换"背景加色，并且 span下的 "替换" 也要 加上背景 并跳转到 相应的input
+
+
+
+
+        //在input输入  文字 ，点击  "查找" 按钮后  ，就找p标签里面相同的 文字   并改变这个文字的颜色
+        var input=document.getElementsByTagName("input")
+        var str=document.getElementsByTagName("p")[0]
+        // input[1].onclick=function(){
+        //     var text=input[0].value
+        //     if(str.indexOf("text")){
+        //         return 2
+        //     }else{
+        //         alert("您输入的值咋文章中没有")
+        //     }
+        // }
+        
+    </script>
+</body>
+</html>
