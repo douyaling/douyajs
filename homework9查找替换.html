@@ -22,12 +22,12 @@
             margin-left: 20px;
             padding: 20px;
         }
-        ul{
+        .list1{
             position: absolute;
             right: 15px;
             top: 30px;
         }
-        ul li{
+        .list1 li{
             list-style: none;
             width: 80px;
             height:50px ;
@@ -59,53 +59,95 @@
         .text input{
             margin: 10px 0 0 15px;
         }
-        .li-active{
-            background: #4799db;
+        #input2{
+            display: none;
         }
-        .span-active{
-            background: tomato;
+        #cz,#th{
+            display: none;
+        }
+        strong{
+            background: yellow;
+        }
+        em{
+            background: red;
+            text-decoration: line-through;
         }
     </style>
 </head>
 <body>
     <div class="wrap">
-        <p>GitHub是一个面向开源及私有软件项目的托管平台，因为只支持git 作为唯一的版本库格式进行托管，
+        <p id="allText">GitHub是一个面向开源及私有软件项目的托管平台，因为只支持git 作为唯一的版本库格式进行托管，
             故名GitHub。GitHub于2008年4月10日正式上线，除了Git代码仓库托管及基本的 Web管理界面以外，
             还提供了订阅、讨论组、文本渲染、在线文件编辑。
         </p>
-        <ul>
+        <ul class="list1"> 
             <li id="zk">展开</li>
-            <li>查找</li>
-            <li>替换</li>
+            <li id="cz">查找</li>
+            <li id="th">替换</li>
         </ul>
         <div class="text">
-            <span>查找</span>
-            <span>替换</span>
+            <span id="tcz">查找</span>
+            <span id="tth">替换</span>
             <hr>
-            <input type="text" value="文本">
-            <!-- <input type="text"> -->
-            <input type="button" value="查找">
+            <ul id="list2">
+                <div id="input1">
+                    <input type="text" id="content">
+                    <input type="button" value="查找" id="find">
+                </div>
+                <div id="input2">
+                    <input type="text" id="content2">
+                    <input type="text" id="replace"> 
+                    <input type="button" value="替换" id="reuse">
+                </div>
+            </ul>
         </div>
     </div>
     <script>
-        //鼠标点击 li下的 "查找"背景加色，并且 span下的 "查找" 也要 加上背景 并跳转到 相应的input
-        //鼠标点击 li下的 "替换"背景加色，并且 span下的 "替换" 也要 加上背景 并跳转到 相应的input
+        //点击 “展开” 查找和 替换显示
+        var zk=document.getElementById("zk")
+        zk.onclick=function(){
+            cz.style.display="block"
+            th.style.display="block"
+        }
+        //点击<span>查找</span> 加背景 出现 input1
+        var span=document.getElementsByTagName("span")
+       
+        for(var i=0;i<span.length;i++){
+            span[i].onclick=function(){
+                
+            }
+        }
 
-
-
-
-        //在input输入  文字 ，点击  "查找" 按钮后  ，就找p标签里面相同的 文字   并改变这个文字的颜色
-        var input=document.getElementsByTagName("input")
-        var str=document.getElementsByTagName("p")[0]
-        // input[1].onclick=function(){
-        //     var text=input[0].value
-        //     if(str.indexOf("text")){
-        //         return 2
-        //     }else{
-        //         alert("您输入的值咋文章中没有")
-        //     }
-        // }
-        
+        //查找功能的实现：点击 提交 在text框中输入的值 在  p 中对应 并加上背景
+        var content=document.getElementById("content")
+        var find=document.getElementById("find")
+        var allText=document.getElementById("allText")
+        var str=allText.innerHTML
+        //console.log(str)
+        find.onclick=function(){
+            var writing=content.value
+            if(str.indexOf(writing)==-1){
+                alert("您输入的值在文中不存在")
+            }else{
+                allText.innerHTML=str.split(writing).join("<strong>"+writing+"</strong>")
+            }
+            content.value=""
+        }
+        //替换功能的实现：点击 替换 左边text框输入的值是文中查找的内容，右边text框中的值是要替换的内容  在  p 中对应 并加上背景
+        var content2=document.getElementById("content2")
+        var replace=document.getElementById("replace")
+        var reuse=document.getElementById("reuse")
+        reuse.onclick=function(){
+            var writing2=content2.value
+            var writing3=replace.value
+            if(str.indexOf(writing2)==-1){
+                alert("要替换的内容在文中没有找到")
+            }else{
+                allText.innerHTML=str.split(writing2).join("<em>"+writing3+"</em>")
+            }
+            content2.value=""
+            replace.value=""
+        }
     </script>
 </body>
 </html>
