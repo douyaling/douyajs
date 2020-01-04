@@ -35,19 +35,27 @@
     //console.log(getTime())//获取本机当前时间
     //连接上图片  以图片的形式 +定时器 显示本机时间
     var aImg = document.getElementsByTagName("img")
+    var old=getTime()
     imgTimeFn()
     setInterval(function(){
         imgTimeFn()
     },1000)
+    
     function imgTimeFn(){
         var imgTime=getTime()
         for(var i=0;i<aImg.length;i++){
+            if(old[i]!==getTime()[i]){
+                shake(aImg[i],"top")
+                old=imgTime
+            }
         if(imgTime.charAt(i)===":"){
             aImg[i].src= "img8/fuh.png"
         }else{
             aImg[i].src= "img8/"+imgTime[i]+".png"
         }
+        
     }
+
 }
     
     //时分秒＜0 的  补零操作
@@ -78,7 +86,7 @@
             obj.style[attr]=pos+arr[n]+"px"
             n++
             if(n==arr.length){
-                clearInterval(timer)
+                clearInterval(obj.timer)
                 obj.timer=null
             }
         },100)
