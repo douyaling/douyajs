@@ -44,6 +44,7 @@
     function imgTimeFn(){
         var imgTime=getTime()
         for(var i=0;i<aImg.length;i++){
+<<<<<<< HEAD
             if(old[i]!==getTime()[i]){
                 shake(aImg[i],"top")
                 old=imgTime
@@ -52,16 +53,35 @@
             aImg[i].src= "img8/fuh.png"
         }else{
             aImg[i].src= "img8/"+imgTime[i]+".png"
+=======
+            if(imgTime.charAt(i)===":"){
+                aImg[i].src= "img8/fuh.png"
+            }else{
+                aImg[i].src= "img8/"+imgTime[i]+".png"
+            }
+            if(old[i]!==imgTime[i]){
+                shake(aImg[i],"top")
+                old=imgTime
+            }
+>>>>>>> b991ccc9ac4409876b5b5ea870887cd71efafb44
         }
         
     }
+<<<<<<< HEAD
 
 }
     
     //时分秒＜0 的  补零操作
+=======
+ //时分秒＜0 的  补零操作
+>>>>>>> b991ccc9ac4409876b5b5ea870887cd71efafb44
     function zero(n){
         return n<10 ? "0"+n : ""+n
     }
+
+
+   
+   
     //兼容IE 和  Google 浏览器 获取位置
     function getStyle(obj,attr){
         if(obj.currentStyle){
@@ -70,7 +90,7 @@
             return getComputedStyle(obj)[attr]
         }
     }
-    //封装抖函数[12 -12 9 -9 6 -6 3 -3 0]
+    //封装抖函数[10 -10 5 -5 0]
     function shake(obj,attr){
         if(obj.timer){
             return
@@ -78,7 +98,7 @@
         var pos=parseInt(getStyle(obj,attr))
         var arr=[]
         var n=0
-        for(i=12;i>0;i-=3){
+        for(i=10;i>0;i-=5){
             arr.push(i,-i)
         }
         arr.push(0)
@@ -91,6 +111,6 @@
             }
         },100)
     }
-
+    //将封装的抖函数 与  时间 的 时(每一时一抖)分(每一分一抖)秒(每一秒一抖) 连接起来
 </script>
 </html>

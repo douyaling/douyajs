@@ -6,113 +6,16 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>练习</title>
     <style>
-        .div1{
-            width:100px;
-            height: 100px;
-            background: red;
-            position: absolute;
-            left: 20px;
-            top: 50px;
-        }
+        
     </style>
 </head>
 <body>
-   <!-- <div class="div1"></div> -->
-   <p id="op"></p>
-<!-- <script>
-    var div=document.getElementsByClassName("div1")[0]
-    //获取元素位置
-    function getStyle(obj,attr){
-        if(obj.currentStyle){
-            return obj.currentStyle[attr]
-        }else{
-            return getComputedStyle(obj)[attr]
-        }
-    }
-    //var pos=parseInt(getStyle(div,"left"))
-    //封装抖函数
-    function shake(obj,attr){
-        if(obj.timer){
-            return
-        }
-        var pos=parseInt(getStyle(obj,attr))
-        var arr=[]
-        var n=0
-        for(var i=12;i>0;i-=3){
-            arr.push(i,-i)
-        }
-        arr.push(0)
-        console.log(arr)
-        obj.timer=setInterval(function(){
-            obj.style[attr]=pos+arr[n]+'px'
-            n++
-            if(n==arr.length){
-                clearInterval(obj.timer)
-                obj.timer=null
-            }
-        },20)
-    }
-    div.onmouseover=function(){
-        shake(div,"top")
-    }
- 
-</script> -->
-    <!-- <script>
-        function getTime(){
-            var oDate=new Date()
-            // var Y=oDate.getFullYear()
-            // var M=oDate.getMonth()+1
-            // var D=oDate.getDate()
-            var H=oDate.getHours()
-            var Mi=oDate.getMinutes()
-            var S=oDate.getSeconds()
-            var time=zero(H)+":"+zero(Mi)+":"+zero(S)
-            return time
-        }
-        //时分秒＜0 的  补零操作
-        function zero(n){
-            if(n<10){
-                return "0"+n
-            }else{
-                return ""+n
-            }
-           // return n<10 ? "0"+n : ""+n
-        }
-        var op=document.getElementById("op")
-        op.innerHTML=getTime()
-        setInterval(function(){
-            op.innerHTML=getTime()
-        },1000)
-    </script> -->
+   <p>好好学习  天天向上</p>
     <script>
-        function getTime(){
-            var date=new Date()
-            var future=new Date("Wed Jan 03 2020 14:45:05")
-            var s=(future-date)/1000
-            //var S=s%60
-            //秒后面加一位小数
-            var S=s%60*10
-            var Mi=s%86400%3600/60
-            var H=s%86400/3600
-            var D=s/86400
-            var time=parseInt(D)+"天"+zero(parseInt(H))+"时"+zero(parseInt(Mi))+"分"+zero(parseInt(S)/10)+"秒"
-            return time
-        }
-         //时分秒＜0 的  补零操作
-        function zero(n){
-            if(n<10){
-                return "0"+n
-            }else{
-                return ""+n
-            }
-        }
         
-        var op=document.getElementById("op")
-        op.innerHTML=getTime()
-        setInterval(function(){
-            op.innerHTML=getTime()
-        },100)
+        var p=document.getElementsByTagName("p")[0]
         
+       
     </script>
 </body>
 </html>

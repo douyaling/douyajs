@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>9.字符串方法</title>
+    <style>
+        *{ 
+            font-family: "微软雅黑";
+        }
+        .wrap{
+            width: 600px;
+            height: 500px;
+            background: silver;
+            position: relative;
+        }
+        p{
+            width: 420px;
+            height: 260px;
+            background: #e5e2e2;
+            margin-left: 20px;
+            padding: 20px;
+        }
+        .list1{
+            position: absolute;
+            right: 15px;
+            top: 30px;
+        }
+        .list1 li{
+            list-style: none;
+            width: 80px;
+            height:50px ;
+            line-height: 50px;
+            text-align: center;
+            font-size: 18px;
+            color: #ffffff;
+            cursor: pointer;
+
+        }
+        #zk{
+            background: red;
+        }
+        .text{
+            width: 500px;
+            height:130px ;
+            border: 10px solid red;
+            margin: 20px;
+        }
+        .text span{
+            display: inline-block;
+            margin: 10px 0 5px 15px;
+            padding: 10px;
+            cursor: pointer;
+        }
+        hr{
+            margin: 10px;
+        }
+        .text input{
+            margin: 10px 0 0 15px;
+        }
+        #input2{
+            display: none;
+        }
+        #cz,#th{
+            display: none;
+            background: #b3d0e7 ;
+        }
+        strong{
+            background: yellow;
+        }
+        em{
+            background: red;
+            text-decoration: line-through;
+        }
+        .active{
+            background: palevioletred !important;
+        }
+    </style>
+</head>
+<body>
+    <div class="wrap">
+        <p id="allText">GitHub是一个面向开源及私有软件项目的托管平台，因为只支持git 作为唯一的版本库格式进行托管，
+            故名GitHub。GitHub于2008年4月10日正式上线，除了Git代码仓库托管及基本的 Web管理界面以外，
+            还提供了订阅、讨论组、文本渲染、在线文件编辑。
+        </p>
+        <ul class="list1"> 
+            <li id="zk">展开</li>
+            <li id="cz" class="btn">查找</li>
+            <li id="th" class="btn">替换</li>
+        </ul>
+        <div class="text">
+            <span>查找</span>
+            <span id="tth">替换</span>
+            <hr>
+            <ul id="list2">
+                <div id="input1">
+                    <input type="text" id="content">
+                    <input type="button" value="查找" id="find">
+                </div>
+                <div id="input2">
+                    <input type="text" id="content2">
+                    <input type="text" id="replace"> 
+                    <input type="button" value="替换" id="reuse">
+                </div>
+            </ul>
+        </div>
+    </div>
+    <script>
+        //点击 “展开” 查找和 替换显示
+        var zk=document.getElementById("zk")
+        zk.onclick=function(){
+            cz.style.display="block"
+            th.style.display="block"
+        }
+        //点击底部查找  替换  自动切换
+        var spanbtn=document.querySelectorAll(".text>span")
+        var input=document.querySelectorAll("#list2>div")
+        var input=[...input]
+        var allText=document.getElementById("allText")
+        var oldtext=allText.innerHTML
+        for(var i=0;i<spanbtn.length;i++){
+            var old1=spanbtn[0]
+            var old2=input[0]
+            spanbtn[i].index=i //0  1
+            spanbtn[i].onclick=function(){
+                old1.className=""
+                old2.style.display="none"
+                this.className="active"
+                input[this.index].style.display="block"
+                old1=this
+                old2=input[this.index]
+                allText.innerHTML=oldtext
+            }
+
+        }
+        //点击右侧 查找  替换  底部查找 替换  自动切换
+        var czandthbtn=document.getElementsByClassName("btn")
+        var czandthbtn=[...czandthbtn]
+        for(var i=0;i<czandthbtn.length;i++){
+            var old1=spanbtn[0]
+            var old2=input[0]
+            var old3=czandthbtn[0]
+            czandthbtn[i].index=i
+            czandthbtn[i].onclick=function(){
+                old3.className=""
+                old1.className=""
+                old2.style.display="none"
+
+                this.className="active"
+                spanbtn[this.index].className="active"
+                input[this.index].style.display="block"
+                
+                old3=this
+                old1=spanbtn[this.index]
+                old2=input[this.index]
+            }
+        }
+        
+        //查找功能的实现：点击 提交 在text框中输入的值 在  p 中对应 并加上背景
+        var content=document.getElementById("content")
+        var find=document.getElementById("find")
+        var allText=document.getElementById("allText")
+        var str=allText.innerHTML
+        find.onclick=function(){
+            var writing=content.value
+            if(str.indexOf(writing)==-1){
+                alert("您输入的值在文中不存在")
+            }else{
+                allText.innerHTML=str.split(writing).join("<strong>"+writing+"</strong>")
+                // console.log(str.split(writing).join("<strong>"+writing+"</strong>"))
+            }
+            content.value=""
+            
+        }
+        
+        //替换功能的实现：点击 替换 左边text框输入的值是文中查找的内容，右边text框中的值是要替换的内容  在  p 中对应 并加上背景
+        var content2=document.getElementById("content2")
+        var replace=document.getElementById("replace")
+        var reuse=document.getElementById("reuse")
+        reuse.onclick=function(){
+            var writing2=content2.value
+            var writing3=replace.value
+            if(str.indexOf(writing2)==-1){
+                alert("要替换的内容在文中没有找到")
+            }else{
+                allText.innerHTML=str.split(writing2).join("<em>"+writing3+"</em>")
+            }
+            content2.value=""
+            replace.value=""
+        }
+    </script>
+</body>
+</html>
