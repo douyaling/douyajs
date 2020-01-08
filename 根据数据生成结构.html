@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>根据数据生成结构</title>
+    <style>
+        ul{
+            padding: 0;
+            margin: 0;
+            list-style: none;
+        }
+    </style>
+</head>
+<body>
+    <h2>购物车</h2>
+    <hr/>
+    <ul id="shop">
+        <!--<li>
+            <p>立白洗衣液</p>
+            <p>简介：洗护合一。。。。</p>
+            <p>
+                相关商品
+                <a href="#">洗发水</a>
+                <a href="#">肥皂</a>
+            </p>
+            <p>￥30</p>
+        </li>-->
+            
+    </ul>
+    <script>
+        var arr=[
+            {
+                shopName:"立白洗衣液",
+                introduce:"洗护合一123。。。",
+                otherShop:["洗发水","沐浴露","沐浴露"],
+                price:40
+            },
+            {
+                shopName:"针织衫",
+                introduce:"秋冬新款",
+                otherShop:["毛衣","大衣","裤子"],
+                price:499
+            },
+            {
+                shopName:"洗衣机",
+                introduce:"多功能。。",
+                
+                price:1999   
+            },
+            {
+                
+                shopName:"裙子",
+                introduce:"雪纺、简单、宽松、修身",
+                otherShop:["凉鞋","T恤"],
+                price:199
+             }
+        ]
+        var shop=document.getElementById("shop")
+       
+        var html=""
+        //循环 arr数组，拿到其中的每一项
+        for(var i=0;i<arr.length;i++){
+            html+="<li>"
+            // html+="<p>"+json.shopName+"</p><p>&yen;"+json.price+"</p><p>简介："+json.introduce+"</p><p>相关商品:"
+            html+="<p>立白洗衣液</p><p>简介：洗护合一。。。。</p><p>￥30</p><p>相关商品:"
+            //arr数组中  otherShop  数组中 的循环
+            if(arr[i].otherShop){
+                for(var j=0;j<arr[i].otherShop.length;j++){
+                    html+="<a href='#'>"+arr[i].otherShop[j]+"</a>"
+            }
+            html+="</p>" 
+            }
+            
+            
+            html+="</li>"
+        }
+     
+        shop.innerHTML=html
+    </script>
+   
+</body>
+</html>
