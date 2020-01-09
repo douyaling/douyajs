@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>10\数组方法</title>
+    <style>
+        ul{
+            font-size: 20px;
+        }
+        ul li{
+            margin: 5px 0;
+        }
+        #btn{
+           width: 80px;
+           height: 30px;
+           color: #ffffff;
+           font-size: 15px;
+           font-weight: bold;
+           text-align: center;
+           background: #cccccc;
+           outline: none;
+           border: 1px solid #ccc;
+           
+        }
+        .active{
+            background: red;
+        }
+        
+    </style>
+</head>
+<body>
+    <div class="wrap">
+        <ul  id="shop">
+            <li>
+                <input type="checkbox" class="check" >
+                <strong>100</strong>
+                <input type="button" value="-">
+                <span>1</span>
+                <input type="button" value="+">
+                <em>100</em>
+            </li>
+            <li>
+                <input type="checkbox" class="check">
+                <strong>200</strong>
+                <input type="button" value="-">
+                <span>1</span>
+                <input type="button" value="+">
+                <em>200</em>
+            </li>
+            <li>
+                <input type="checkbox" class="check">
+                <strong>49</strong> &nbsp;
+                <input type="button" value="-">
+                <span>1</span>
+                <input type="button" value="+">
+                <em>49</em>
+            </li>
+            <li>
+                <input type="checkbox" class="check">
+                <strong>58</strong> &nbsp;
+                <input type="button" value="-">
+                <span>1</span>
+                <input type="button" value="+">
+                <em>58</em>
+            </li>
+        </ul>
+        <p>全选 ： <input type="checkbox" id="selectAll"></p> 
+        <p id="selected">已选中：<strong>0</strong>  ; &nbsp;&nbsp; 商品共计 ：<span>4</span> ; &nbsp;&nbsp;应付总额 ：<em>0</em> &nbsp;&nbsp;&nbsp;&nbsp; <input id="btn" type="button" value="现在结算"></p>
+    </div>
+    <script>
+        //先实现第一个li的效果
+      
+       var shop=document.getElementById("shop")
+       var li=shop.getElementsByTagName("li")
+    //    change(li[0])
+    //    change(li[1])
+       for(var i=0;i<li.length;i++){
+        change(li[i])
+       }
+        //点击 +    span（数量）  和  em（总价） 发生相应变化
+       function change(l){
+            var input=l.getElementsByTagName("input")
+            var span=l.getElementsByTagName("span")[0]
+            var em=l.getElementsByTagName("em")[0]
+            var strong=l.getElementsByTagName("strong")[0]
+            input[2].onclick=function(){
+                span.innerHTML++
+                em.innerHTML=strong.innerHTML*span.innerHTML
+                fn2()
+            }
+                //点击 -    span（数量）  和  em（总价） 发生相应变化
+                input[1].onclick=function(){
+                    if(span.innerHTML<=0){
+                        return
+                    }
+                span.innerHTML--
+                em.innerHTML=strong.innerHTML*span.innerHTML
+                fn2()
+            }
+       }
+       
+       // 商品共计 ：<span>4</span>  =  每个li下的  span 中的数量
+       
+        var selected=document.getElementById("selected")
+        var span=shop.getElementsByTagName("span")
+        //console.log(span)
+        var selectedSpan=selected.getElementsByTagName("span")[0]
+        function fn2(){
+            var n=0
+            for(var i=0;i<li.length;i++){
+                n+=parseInt(span[i].innerHTML)
+            }
+            selectedSpan.innerHTML=n
+       }
+       //判断当 li下的所以复选框 都打钩的时候   全选的复选框打钩；  反之  只要全选复选框打钩，li下的所以复选框 都打钩
+       //要用到数组方法 every(),所以要将checkInput变为一个数组
+       var checkInput=shop.getElementsByClassName("check")
+       var selectAll=document.getElementById("selectAll")
+       var checkInput=[...checkInput]
+       var onoff=checkInput.every(function(item,i){
+            return item.checked
+       })
+       console.log(onoff)
+    //    if(onoff){
+    //         selectAll.checked=true 
+    //    }else{
+    //     selectAll.checked=false
+    //    }
+      //判断复选框是否打钩；  只要有一个打钩，P标签的strong 数字改变  ； 应付总额 ：<em>0</em>变 ；p标签下的 input结算加ClassName（active）
+       
+       
+       
+
+    </script>
+</body>
+</html>
