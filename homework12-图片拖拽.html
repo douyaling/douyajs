@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>12-DOM事件</title>
+    <style>
+		*{
+			padding:0;
+			margin:0 auto;
+		}
+		.box ul{
+			list-style: none;
+		}
+        .box ul li{
+			z-index:1;
+			position:absolute;
+			margin:10px;
+
+        }
+		
+        .box li img{
+            width: 200px;
+            height: 150px;
+        }
+		
+        .box{
+			width:850px;
+			height:330px;
+            border: 1px dashed #000000;
+            margin-top: 20px;
+			position:relative
+           }
+                           
+    </style>
+</head>
+<body>
+    <div class="wrap">
+        <input type="button" value="随机">
+        <div class="box">
+			<ul>
+				<li><img src="./img12/1.jpg" alt=""></li>
+				<li><img src="./img12/2.jpg" alt=""></li>
+				<li><img src="./img12/3.jpg" alt=""></li>
+				<li><img src="./img12/4.jpg" alt=""></li>
+				<li><img src="./img12/1.jpg" alt=""></li>
+				<li><img src="./img12/2.jpg" alt=""></li>
+				<li><img src="./img12/3.jpg" alt=""></li>
+				<li><img src="./img12/4.jpg" alt=""></li>
+			</ul>
+
+        </div>
+    </div>
+    <script>
+        
+		var oLi=document.getElementsByTagName("li")
+		var oLi=[...oLi]
+		var oZindex=2
+		//将图片排成2排
+		for(var i=0;i<oLi.length;i++){
+			oLi[i].style.left=i%4*210+"px"
+			oLi[i].style.top=parseInt(i/4)*160+"px"
+		}
+		//图片拖拽（拖拽3步骤：鼠标按下 求鼠标在元素身上的坐标    鼠标移动     鼠标抬起）
+		oLi.forEach(function(item,index){
+			
+			item.onmousedown=function(ev){
+				//console.log(ev)
+				//求鼠标在元素身上的距离
+				var imgx=ev.clientX-item.offsetLeft
+				var imgy=ev.clientY-item.offsetTop
+				item.style.zIndex = oZindex++
+				
+				//要想让元素移动，就要改变元素的left值，所以onmousemove得时候，求出元素的left值
+				document.onmousemove=function(ev){
+					//oImg[0].offsetLeft=ev.clientX-imgx  //不写成offsetLeft的原因：offsetLeft只读 ；style.left 可读可写
+					item.style.left=ev.clientX-imgx+"px"
+					item.style.top=ev.clientY-imgy+"px"
+				}	
+				//鼠标抬起，图片并没有停在某个地方不动，还是跟着鼠标移动。所以要取消鼠标移动这个事件
+				document.onmouseup=function(ev){
+					document.onmousemove=null
+				}
+				//拖拽如果是图片 就会触发默认系统默认事件，阻止默认事件  return false
+				return false
+			}
+		})
+		
+       //打乱图片顺序
+	   var btn=document.getElementsByTagName("input")[0]
+	   btn.onclick=function(){
+			oLi.sort(function(){
+				return Math.random()-0.5
+			})
+			for(var i=0;i<oLi.length;i++){
+				oLi[i].style.left=i%4*210+"px"
+				oLi[i].style.top=parseInt(i/4)*160+"px"
+		}
+	   }
+        
+    </script>
+</body>
+</html>
