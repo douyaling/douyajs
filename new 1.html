@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>form表单post()提交数据</title>
+		<style>
+			.texts{
+				border:1px solid blue;
+				font-size:16px;
+				padding:5px;
+				width:500px;
+				height:30px;
+				
+			}
+			.list{
+				width:500px;
+				list-style:none;
+				display:block;
+				border:1px solid #ccc;
+				margin:0;
+				padding:0;
+			}
+			li a{
+				padding:5px;
+				text-decoration:none;
+				color:#000000;
+				display:block;
+				line-height:30px;
+			}
+			li a:hover{
+				background:#cccccc;
+			}
+		</style>
+	</head>
+	<body>
+		<input class="texts" type="text">
+		<ul class="list">
+			<!--<li><a href='#'>11</a></li>
+			<li><a href='#'>22</a></li>
+			<li><a href='#'>33</a></li>-->
+		</ul>
+		<script>
+			var list=document.getElementsByClassName("list")[0]
+			function dy(data){
+					console.log(data)
+			}
+		</script>
+		
+		<script>
+			var text=document.getElementsByClassName("texts")[0]
+			var list=document.getElementsByClassName("list")[0]
+			text.onkeyup=function(){
+				//键盘抬起的时候创建script标签
+				var oScript=document.createElement('script')
+				oScript.src="https://www.baidu.com/sugrec?pre=1&p=3&ie=utf-8&json=1&prod=pc&wd="+text.value+"&cb=dy"
+				//dy([])
+				document.body.appendChild(oScript)
+			}
+			
+		</script>
+	</body>
+	
+</html>
